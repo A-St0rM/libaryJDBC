@@ -1,5 +1,6 @@
 package persistence;
 
+import DTO.BorrowerAndAddressDTO;
 import entities.Borrower;
 import exceptions.DatabaseException;
 
@@ -7,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BorrowerRepo {
 
@@ -48,5 +51,32 @@ public class BorrowerRepo {
         }
     }
 
+    public List<BorrowerAndAddressDTO> getAllBorrowerWithAddress() throws DatabaseException{
 
+        String query = "SELECT navn, postnummer.postnr, postnummer.by\n" +
+                "FROM laaner\n" +
+                "JOIN postnummer ON postnummer.postnr = laaner.postnr";
+
+        List<BorrowerAndAddressDTO> borrowerAndAddressDTOList = new ArrayList<>();
+
+        try(Connection connection = databaseConnection.getConnection())
+        {
+            try(PreparedStatement preparedStatement = connection.prepareStatement(query))
+            {
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while(resultSet.next()){
+
+                    String name = resultSet.getString("navn");
+                    int zip = resultSet.getInt("postnr");
+                    String city = resultSet.getString("by");
+                    borrowerAndAddressDTOList.add(new BorrowerAndAddressDTO(name, zip, city));
+                }
+            }
+        }
+        catch (SQLException e){
+            throw new DatabaseException("could not get all borrowers with address", e);
+        }
+        return borrowerAndAddressDTOList;
+    }
 }

@@ -46,8 +46,12 @@ public class Main
 //            Book book = bookRepo.findBookByName("Den lange rejse");
 //            System.out.println(book);
 
-            Book book = authorRepo.findBookByAuthor("Karen Blixen");
-            System.out.print(book);
+//            Book book = authorRepo.findBookByAuthor("Karen Blixen");
+//            System.out.print(book);
+
+            borrowerRepo.getAllBorrowerWithAddress().forEach(System.out::println);
+
+            bookRepo.getAllBooksAndAuthors().forEach(System.out::println);
         }
         catch (DatabaseException e)
         {
