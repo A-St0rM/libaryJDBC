@@ -1,6 +1,6 @@
 package persistence;
 
-import DTO.BooksAndAuthorsDTO;
+import dto.BooksAndAuthorsDTO;
 import entities.Book;
 import exceptions.DatabaseException;
 

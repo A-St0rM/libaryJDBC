@@ -1,9 +1,6 @@
 package persistence;
 
-import DTO.LoanBookAndAuthorsDTO;
-import entities.Book;
-import entities.Borrower;
-import entities.Loan;
+import dto.LoanWithBooksAndAuthorsDTO;
 import exceptions.DatabaseException;
 
 import java.sql.*;
@@ -19,9 +16,9 @@ public class LoanRepo {
     }
 
 
-    public List<LoanBookAndAuthorsDTO> GetAllLoanersWithBooktitelAndAuthors() throws DatabaseException{
+    public List<LoanWithBooksAndAuthorsDTO> GetAllLoanersWithBooktitelAndAuthors() throws DatabaseException{
 
-        List<LoanBookAndAuthorsDTO> loanBookAndAuthorsList = new ArrayList<>();
+        List<LoanWithBooksAndAuthorsDTO> loanBookAndAuthorsList = new ArrayList<>();
 
         String query = "SELECT l.navn, b.titel, udgivelsesaar, f.navn\n" +
                 "FROM laaner l\n" +
@@ -40,7 +37,7 @@ public class LoanRepo {
                     int releaseYear = resultSet.getInt("udgivelsesaar");
                     String authorName = resultSet.getString("navn");
 
-                    loanBookAndAuthorsList.add(new LoanBookAndAuthorsDTO(titel, releaseYear, name, authorName));
+                    loanBookAndAuthorsList.add(new LoanWithBooksAndAuthorsDTO(titel, releaseYear, name, authorName));
                 }
             }
         } catch (SQLException e) {

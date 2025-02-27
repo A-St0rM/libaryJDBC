@@ -1,6 +1,6 @@
 package persistence;
 
-import DTO.BorrowerAndAddressDTO;
+import dto.BorrowerAndAddressDTO;
 import entities.Borrower;
 import exceptions.DatabaseException;
 
@@ -34,7 +34,7 @@ public class BorrowerRepo {
                     String name = resultSet.getString("navn");
                     String address = resultSet.getString("adresse");
                     int zip = resultSet.getInt("postnr");
-                    return new Borrower(id, name, address + ", " + zip, null);
+                    return new Borrower(id, name, address, zip);
 
                 } else
                 {

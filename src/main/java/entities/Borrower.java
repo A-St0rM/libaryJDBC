@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Borrower {
 
@@ -17,11 +18,19 @@ public class Borrower {
         this.borrowedBooks = books;
     }
 
+    public Borrower(int borrower_id, String name, String address, int zip) {
+        this.borrower_id = borrower_id;
+        this.name = name;
+        this.address = address;
+        this.zip = zip;
+    }
+
     public Borrower(String name, String address, int zip) {
         this.name = name;
         this.address = address;
         this.zip = zip;
     }
+
 
     public Borrower(String name, String address, List<Loan> books) {
         this.name = name;
@@ -71,5 +80,17 @@ public class Borrower {
 
     public String toString(){
         return borrower_id + " " + name + " " + " " + address;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Borrower borrower = (Borrower) o;
+        return borrower_id == borrower.borrower_id && zip == borrower.zip && Objects.equals(name, borrower.name) && Objects.equals(address, borrower.address) && Objects.equals(borrowedBooks, borrower.borrowedBooks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(borrower_id, name, address, zip, borrowedBooks);
     }
 }

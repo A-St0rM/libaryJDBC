@@ -1,4 +1,4 @@
-package DTO;
+package dto;
 
 public class BorrowerAndAddressDTO {
 
@@ -7,6 +7,12 @@ public class BorrowerAndAddressDTO {
     private String city;
 
     public BorrowerAndAddressDTO(String name, int zip, String city) {
+        this.name = name;
+        this.zip = zip;
+        this.city = city;
+    }
+
+    public BorrowerAndAddressDTO(String name, String city, int zip) {
         this.name = name;
         this.zip = zip;
         this.city = city;
