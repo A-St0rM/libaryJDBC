@@ -4,7 +4,6 @@ import entities.Book;
 import entities.Borrower;
 import exceptions.DatabaseException;
 import persistence.*;
-
 import java.net.Authenticator;
 
 public class Main
@@ -57,6 +56,7 @@ public class Main
 
 //            loanRepo.deleteLoaner(2,3);
 
+            bookRepo.updateBookTitle("Den korte rejse", "Den lange rejse");
 
 
         }

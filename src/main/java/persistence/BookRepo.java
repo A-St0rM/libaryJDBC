@@ -71,4 +71,30 @@ public class BookRepo {
         return books;
     }
 
+    public boolean updateBookTitle(String currentTitle, String newTitle) throws DatabaseException {
+        boolean result = false;
+        String sql = "UPDATE bog SET titel = ? WHERE titel = ?";
+
+        try (Connection connection = databaseConnection.getConnection()) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+                preparedStatement.setString(1, newTitle);   // Ny titel
+                preparedStatement.setString(2, currentTitle); // Gammel titel
+
+                // Udfør opdateringen
+                int rowsAffected = preparedStatement.executeUpdate();
+                if (rowsAffected > 0) { // Hvis mindst én række blev opdateret
+                    result = true;
+                    System.out.println("Updated successfully");
+                } else {
+                    System.out.println("No book found with the given title.");
+                }
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Could not update title", e);
+        }
+        return result;
+    }
+
+
 }
