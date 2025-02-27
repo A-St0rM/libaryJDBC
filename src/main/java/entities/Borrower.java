@@ -7,7 +7,7 @@ public class Borrower {
     private int borrower_id;
     private String name;
     private String address;
-
+    private int zip;
     private List<Loan> borrowedBooks;
 
     public Borrower(int borrower_id, String name, String address, List<Loan> books) {
@@ -15,6 +15,12 @@ public class Borrower {
         this.name = name;
         this.address = address;
         this.borrowedBooks = books;
+    }
+
+    public Borrower(String name, String address, int zip) {
+        this.name = name;
+        this.address = address;
+        this.zip = zip;
     }
 
     public Borrower(String name, String address, List<Loan> books) {
@@ -33,6 +39,10 @@ public class Borrower {
 
     public String getName() {
         return name;
+    }
+
+    public int getZip(){
+        return zip;
     }
 
     public void setName(String name) {

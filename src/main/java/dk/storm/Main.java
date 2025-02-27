@@ -3,10 +3,7 @@ package dk.storm;
 import entities.Book;
 import entities.Borrower;
 import exceptions.DatabaseException;
-import persistence.AuthorRepo;
-import persistence.BookRepo;
-import persistence.BorrowerRepo;
-import persistence.DatabaseConnection;
+import persistence.*;
 
 import java.net.Authenticator;
 
@@ -36,6 +33,7 @@ public class Main
         BorrowerRepo borrowerRepo = new BorrowerRepo(databaseConnection);
         BookRepo bookRepo = new BookRepo(databaseConnection);
         AuthorRepo authorRepo = new AuthorRepo(databaseConnection);
+        LoanRepo loanRepo = new LoanRepo(databaseConnection);
 
         try
         {
@@ -49,9 +47,18 @@ public class Main
 //            Book book = authorRepo.findBookByAuthor("Karen Blixen");
 //            System.out.print(book);
 
-            borrowerRepo.getAllBorrowerWithAddress().forEach(System.out::println);
+//            borrowerRepo.getAllBorrowerWithAddress().forEach(System.out::println);
+//
+//            bookRepo.getAllBooksAndAuthors().forEach(System.out::println);
+//
+//            loanRepo.GetAllLoanersWithBooktitelAndAuthors().forEach(System.out::println);
+//            Borrower borrower2 = new Borrower("Jens", "Voltvej 5", 7500);
+//            Borrower borrower = borrowerRepo.InsertNewBorrower(borrower2);
 
-            bookRepo.getAllBooksAndAuthors().forEach(System.out::println);
+//            loanRepo.deleteLoaner(2,3);
+
+
+
         }
         catch (DatabaseException e)
         {
